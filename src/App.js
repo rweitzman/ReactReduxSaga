@@ -1,21 +1,17 @@
-import "./styles/app.css";
+import { GlobalStyles } from "./styles/global-styles";
+import { AppWrapper, SideBar, AppLogo, AppBody } from "./styles/app-styles";
+import OpendorseLogo from "./assets/logo-opendorse.png";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="app">
+      <GlobalStyles />
+      <AppWrapper>
+        <SideBar>
+          <AppLogo src={OpendorseLogo} alt="Opendorse" />
+        </SideBar>
+        <AppBody />
+      </AppWrapper>
     </div>
   );
 }
