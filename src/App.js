@@ -1,6 +1,8 @@
+import "./utils/api";
 import { GlobalStyles } from "./styles/global-styles";
 import { AppWrapper, SideBar, AppLogo, AppBody } from "./styles/app-styles";
 import OpendorseLogo from "./assets/logo-opendorse.png";
+import { Athletes } from "./containers/athletes";
 
 function App() {
   return (
@@ -10,7 +12,9 @@ function App() {
         <SideBar>
           <AppLogo src={OpendorseLogo} alt="Opendorse" />
         </SideBar>
-        <AppBody />
+        <AppBody>
+          <Athletes />
+        </AppBody>
       </AppWrapper>
     </div>
   );

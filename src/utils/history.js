@@ -1,10 +1,7 @@
-import createHistory from "history/createBrowserHistory";
+import { createBrowserHistory } from "history";
 
 let history;
 export default function configureHistory() {
-  if (!history) {
-    history = createHistory();
-    return history;
-  }
+  if (!history) history = createBrowserHistory();
   return history;
 }

@@ -1,9 +1,9 @@
 import axios from "axios";
-import { takeLatest, call } from "redux-saga/effects";
+import { takeLatest, call, all } from "redux-saga/effects";
 import { actionTypes } from "../actions/athlete-actions";
 
 export const apiCalls = {
-  getAthletes: () => axios.get("todo"),
+  getAthletes: () => axios.get("getAthleteAccounts"),
 };
 
 function* getAthletes() {
@@ -13,4 +13,6 @@ function* getAthletes() {
   } catch (error) {}
 }
 
-export const athleteSaga = [takeLatest(actionTypes.GET_ATHLETES, getAthletes)];
+export function* athleteSaga() {
+  yield all([takeLatest(actionTypes.GET_ATHLETES, getAthletes)]);
+}
