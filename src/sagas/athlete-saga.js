@@ -9,7 +9,7 @@ export const apiCalls = {
 function* getAthletes() {
   try {
     const response = yield call(apiCalls.getAthletes);
-    console.log(response);
+    console.log(response.data);
   } catch (error) {}
 }
 
