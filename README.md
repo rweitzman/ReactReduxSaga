@@ -38,9 +38,9 @@ based on the following mockups:
 
 ![Mockup](src/assets/mockup.png?raw=true "mockup")
 
-## Bonus activities
+## Bonus activities (optional)
 
-Time and experience level permitting, please complete any of the following bonus activities:
+Time and experience level permitting, please complete one or more of the following bonus activities:
 
 - Create a UI for sorting the athlete channel cards
 - Create a UI for searching the athlete channel cards
