@@ -7,7 +7,7 @@ export const Athletes = () => {
   const dispatch = useDispatch();
   dispatch(actions.getAthletes());
 
-  return null;
+  return <div></div>;
 };
 
 Athletes.propTypes = {
