@@ -7,7 +7,7 @@ This will help us get a good understanding of your writing styles and thought pr
 not expected for you to spend more than 2-4 hours to complete this project. If you complete
 the base requirements with time to spare, there is a list of bonus activities at the bottom
 of this readme. Please be creative, have fun, and don’t hesitate to send any questions to
-tommy.vacek@opendorse.com. We’re excited to see what you build!
+steve@opendorse.com. We’re excited to see what you build!
 
 — The Opendorse Product & Tech Team
 
