@@ -12,7 +12,7 @@ function App() {
         <SideBar>
           <AppLogo src={OpendorseLogo} alt="Opendorse" />
         </SideBar>
-        <AppBody>
+        <AppBody className="ui grid container three column wide d-flex">
           <Athletes />
         </AppBody>
       </AppWrapper>

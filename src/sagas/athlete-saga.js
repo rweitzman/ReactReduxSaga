@@ -1,6 +1,6 @@
 import axios from "axios";
-import { takeLatest, call, all } from "redux-saga/effects";
-import { actionTypes } from "../actions/athlete-actions";
+import { takeLatest, call, all , put } from "redux-saga/effects";
+import { actionTypes , actions } from "../actions/athlete-actions";
 
 export const apiCalls = {
   getAthletes: () => axios.get("getAthleteAccounts"),
@@ -9,7 +9,7 @@ export const apiCalls = {
 function* getAthletes() {
   try {
     const response = yield call(apiCalls.getAthletes);
-    console.log(response.data);
+   yield put(actions.fetchedAllAthelets(response.data))
   } catch (error) {}
 }
 
