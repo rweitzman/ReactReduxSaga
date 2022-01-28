@@ -16,6 +16,7 @@ export const SideBar = styled.div`
 export const AppBody = styled.div`
   width: 100%;
   padding: 16px;
+  overflow-y: scroll;
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
   box-shadow: 0 2px 9px rgba(19, 41, 63, 0.2);

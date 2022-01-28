@@ -9,7 +9,8 @@ export const apiCalls = {
 function* getAthletes() {
   try {
     const response = yield call(apiCalls.getAthletes);
-   yield put(actions.fetchedAllAthelets(response.data))
+   yield put(actions.fetchedAllAthletes(response.data))
+   console.log("data:", response.data)
   } catch (error) {}
 }
 

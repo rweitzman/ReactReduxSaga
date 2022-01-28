@@ -7,7 +7,7 @@ export const actions = {
   getAthletes: () => ({
     type: actionTypes.GET_ATHLETES
   }),
-  fetchedAllAthelets: (payload)=>({
+  fetchedAllAthletes: (payload)=>({
     type: actionTypes.FETCHED_ATHLETES,
     payload
   })
