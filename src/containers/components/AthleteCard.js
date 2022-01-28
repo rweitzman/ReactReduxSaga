@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../../actions/athlete-actions";
-import checkmark from "../../assets/icon-checkmark.svg";
 import noPicture from "../../assets/noPicture.png"
 
 /**
@@ -21,8 +20,6 @@ import noPicture from "../../assets/noPicture.png"
  */
 
 export const AthleteCard = () => {
-  // const [athletes, setAthletes] = useState()
-
   const dispatch = useDispatch();
 
   const athletes = useSelector((state) => state.allAthletes.athletes);
@@ -131,16 +128,6 @@ export const AthleteCard = () => {
           </div>
           <div className="eleven wide column" style={{ marginTop: "7%" }}>
             <div className="content">
-              {/* 
-                 
-                 1223
-
-text-overflow:ellipsis; only works when the following are true:
-
-The element's width must be constrained in px (pixels). Width in % (percentage) won't work.
-The element must have overflow:hidden and white-space:nowrap set.
-                 
-                 */}
               <div
                 style={{
                   fontWeight: "900",
@@ -287,7 +274,7 @@ The element must have overflow:hidden and white-space:nowrap set.
   });
 
   return (
-    <>{renderedList === undefined ? "Katrina is Awesome" : renderedList}</>
+    <>{renderedList === undefined ? "Hold on just a moment, please!" : renderedList}</>
   );
 };
 
@@ -297,143 +284,3 @@ AthleteCard.propTypes = {
 
 export default AthleteCard;
 
-/**
- * 
- * 
- *                  <div>
-                        {platform === "Facebook" && (
-                          <i
-                            class="facebook f icon"
-                            style={{ color: "#3B5998" }}
-                          ></i>
-                        )}
-                        {platform === "Reddit" && (
-                          <i
-                            class="reddit icon inverted"
-                            style={{ color: "#FF4500" }}
-                          ></i>
-                        )}
-                        {platform === "Instagram" && (
-                          <i
-                            class="instagram icon"
-                            style={{ color: "#C13584" }}
-                          ></i>
-                        )}
-                      </div>
- */
-
-/**
-                       * 
-                       * <div className="eleven wide column">
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  marginTop: "10px",
-                }}
-              >
-                <div
-                  style={{
-                    width: "50%",
-                    height: "20px",
-                  }}
-                >
-                  <div
-                    style={{
-                      backgroundColor: "#cdcdcd",
-                      borderRadius: "5px",
-                      width: "24px",
-                      height: "24px",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      position: "absolute",
-                      top: "53%",
-                      left: "5%",
-                    }}
-                  >
-                    <div
-                      style={{
-                        borderRadius: "5px",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <div>
-                        {platform === "Facebook" && (
-                          <i
-                            class="facebook f icon"
-                            style={{ color: "#3B5998" }}
-                          ></i>
-                        )}
-                        {platform === "Reddit" && (
-                          <i
-                            class="reddit icon inverted"
-                            style={{ color: "#FF4500" }}
-                          ></i>
-                        )}
-                        {platform === "Instagram" && (
-                          <i
-                            class="instagram icon"
-                            style={{ color: "#C13584" }}
-                          ></i>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                  <div style={{ marginLeft: "25px", width: "35%" }}>300K</div>
-                </div>
-
-                <div
-                  style={{
-                    width: "40%",
-                    height: "20px",
-                    overflow: "hidden",
-                  }}
-                >
-                  <div
-                    style={{
-                      backgroundColor: "white",
-                      borderRadius: "5px",
-                      width: "24px",
-                      height: "24px",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      position: "absolute",
-                      top: "53%",
-                      left: "45%",
-                    }}
-                  >
-                    <div
-                      style={{
-                        borderRadius: "5px",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <div>
-                        <i class="linkify icon"></i>
-                      </div>
-
-                      <div
-                        style={{
-                          marginLeft: "25px",
-                          maxWidth: "30px",
-                          overflowY: "hidden",
-                          overflowX: "hidden",
-                          whiteSpace: "nowrap",
-                          maxHeight: "20px",
-                          textOverflow: "ellipsis",
-                        }}
-                      >
-                        {url}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-                       */
