@@ -20,49 +20,13 @@ import noPicture from "../../assets/noPicture.png"
  */
 
 export const AthleteCard = () => {
-  const [athleteInfo, setAthleteInfo] = useState([])
   const dispatch = useDispatch();
 
   const athletes = useSelector((state) => state.allAthletes.athletes);
-    useEffect(() => {
+
+  useEffect(() => {
     dispatch(actions.getAthletes());
   }, [dispatch]);
-
-  // useEffect(() => 
-
-  // )
- 
-
-
-  // useEffect(() =>{
-  //   if(athletes != undefined) {
-  //     setAthleteInfo(athletes)
-  //   }
-  //   return athleteInfo
-  // }, [athletes])
-
-  // // console.log("athleteInfo no way!!!!", athleteInfo[0].subscriberCount)
-
-  // useEffect(() => {
-  //   // pull back athleteInfo only after dispatch has ran
- 
-  // }, [dispatch, athletes])
-
-  
-
-//   const convertSubs = () => {
-//     let subsToConvert = athleteInfo[0].subscriberCount;
-//     if (subsToConvert != undefined) {
-//       let converted = Math.round(subsToConvert)
-//       return converted
-//     }
-//   }
-
-// useEffect(() => {
-//   convertSubs()
-// })
-  
-
 
   const renderedList = athletes?.map((athlete) => {
     const {
@@ -73,12 +37,10 @@ export const AthleteCard = () => {
       subscriberCount,
       url,
       verified,
-      id
     } = athlete;
    
     return (
       <div
-      key={id}
         className="ui card link m-2"
         style={{ width: "325px", height: "120px" }}
       >
@@ -92,7 +54,7 @@ export const AthleteCard = () => {
                     width: "5px",
                     height: "122px",
                     position: "absolute",
-                    top: "10%",
+                    top: "9%",
                     right: "83.5%",
                     borderRadius: "5px",
                   }}
@@ -105,7 +67,7 @@ export const AthleteCard = () => {
                     width: "5px",
                     height: "122px",
                     position: "absolute",
-                    top: "10%",
+                    top: "9%",
                     right: "83.5%",
                     borderRadius: "5px",
                   }}
@@ -118,7 +80,7 @@ export const AthleteCard = () => {
                     width: "5px",
                     height: "122px",
                     position: "absolute",
-                    top: "10%",
+                    top: "9%",
                     right: "83.5%",
                     borderRadius: "5px",
                   }}
@@ -185,10 +147,10 @@ export const AthleteCard = () => {
                 @{handle}
               </div>
             </div>
-            <div className="ten wide column">
+            <div className="eleven wide column">
               <div className="grid" style={{ marginTop: "10px" }}>
                 <div className="eleven wide column" style={{ display: "flex" }}>
-                  <div style={{ minWidth: "45%", maxWidth: "45%", float: "left", display: "flex" }}>
+                  <div style={{ width: "40%", float: "left", display: "flex" }}>
                     <div
                       style={{
                         width: "20px",
@@ -250,6 +212,7 @@ export const AthleteCard = () => {
                   </div>
                   <div
                     style={{
+                      maxWidth: "125px",
                       float: "right",
                       display: "flex",
                       overflowY: "hidden",
@@ -289,9 +252,8 @@ export const AthleteCard = () => {
                     <div
                       style={{
                         fontSize: "1.1em",
-                        color: "red",
-                        minWidth: "90px",
-                        maxWidth: "90px",
+                        color: "#132640",
+                        maxWidth: "200px",
                         overflowY: "hidden",
                         overflowX: "hidden",
                         whiteSpace: "nowrap",
