@@ -2,279 +2,151 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../../actions/athlete-actions";
-import noPicture from "../../assets/noPicture.png"
-
-/**
- * 
- * {
-  handle: string // the social channel handle
-  id: string // the social channel identifier
-  name: string // the social channel name
-  platform: string // the social channel's platform (Reddit, Facebook, or Instagram)
-  platformId: string // the social channel identifier on its respective platform
-  profileImage: string // the profile picture for the social channel
-  subscriberCount: number // the number of followers/subscribers for the social channel
-  url: string // the url for the social channel
-  verified: bool // the verified status for the social channel
-}
- */
+import { Link } from "react-router-dom";
+// If athlete doesn't have a picture, show this placeholder
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import CardActions from "@mui/material/CardActions";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import { CardActionArea } from "@mui/material";
+import { CustomCard } from "../../styles/app-styles";
 
 export const AthleteCard = () => {
+  const [updatedState, setUpdatesState] = useState([]);
+  const [athleteInfo, setAthleteInfo] = useState([]);
   const dispatch = useDispatch();
 
+  //Pull all athletes
   const athletes = useSelector((state) => state.allAthletes.athletes);
 
   useEffect(() => {
     dispatch(actions.getAthletes());
   }, [dispatch]);
 
-  const renderedList = athletes?.map((athlete) => {
-    const {
-      name,
-      profileImage,
-      handle,
-      platform,
-      subscriberCount,
-      url,
-      verified,
-    } = athlete;
-   
+  // Hook to set athletes to new state to be able to change as needed
+  useEffect(() => {
+    if (athletes !== undefined) {
+      setAthleteInfo(athletes);
+    }
+    return athleteInfo;
+  }, [athletes]);
+
+  // Hook to check to see if athlete has a subscriber count and call function to convert subscriber count format
+  useEffect(() => {
+    if (athleteInfo[0]?.imageUrl !== undefined) {
+      console.log("athleteInfo[0]?.imageUrl", athleteInfo[0]?.imageUrl);
+      convertedURL(athleteInfo[0].imageUrl);
+    }
+  }, [athleteInfo[0]?.imageUrl]);
+
+  // make a utility function to adjust picture url so it can be displayed
+
+  const convertedURL = (imageUrl) => {
+    let restVar = imageUrl;
+    restVar = restVar.replace("i.", "");
+    console.log("restVar", restVar);
+    return restVar;
+  };
+
+  // Hook to  set upadated array info into a new state to render it to the user
+  useEffect(() => {
+    // change this is be the uopate url with the utiltity function
+    if (athleteInfo.legth !== 0) {
+      athleteInfo.map((updatedItem) => {
+        if (updatedItem.imageUrl) {
+          updatedItem.imageUrl = convertedURL(updatedItem.imageUrl);
+        }
+      });
+    }
+    setUpdatesState(athleteInfo);
+  }, [athleteInfo]);
+
+  const renderedList = updatedState?.map((athlete) => {
+    const { id, title, userId, content, likes, hits, categoryId, imageUrl } =
+      athlete;
+
     return (
-      <div
-        className="ui card link m-2"
-        style={{ width: "325px", height: "120px" }}
-      >
-        <div className="ui grid">
-          <div className="five wide column">
-            <div style={{ zIndex: "9" }}>
-              {platform === "Facebook" && (
-                <div
-                  style={{
-                    backgroundColor: "#3B5998",
-                    width: "5px",
-                    height: "122px",
-                    position: "absolute",
-                    top: "9%",
-                    right: "83.5%",
-                    borderRadius: "5px",
-                  }}
-                ></div>
-              )}
-              {platform === "Reddit" && (
-                <div
-                  style={{
-                    backgroundColor: "#FF4500",
-                    width: "5px",
-                    height: "122px",
-                    position: "absolute",
-                    top: "9%",
-                    right: "83.5%",
-                    borderRadius: "5px",
-                  }}
-                ></div>
-              )}
-              {platform === "Instagram" && (
-                <div
-                  style={{
-                    backgroundColor: "#C13584",
-                    width: "5px",
-                    height: "122px",
-                    position: "absolute",
-                    top: "9%",
-                    right: "83.5%",
-                    borderRadius: "5px",
-                  }}
-                ></div>
-              )}
-            </div>
-            <div className="image" style={{ height: "100px", width: "80px" }}>
-              <div>
-                <img
-                  src={profileImage ? profileImage : noPicture}
-                  style={{
-                    minHeight: "80px",
-                    maxHeight: "80px",
-                    width: "80px",
-                    borderRadius: "50%",
-                    margin: "20px",
-                  }}
-                />
-                <div
-                  style={
-                    verified
-                      ? {
-                          visibility: "visible",
-                          height: "20px",
-                          width: "20px",
-                          backgroundColor: "white",
-                          borderRadius: "50%",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          position: "absolute",
-                          top: "70%",
-                          left: "85%",
-                          boxShadow: "0px 0px 6px #cdcdcd",
-                        }
-                      : { visibility: "hidden" }
-                  }
-                >
-                  <i class="check icon" style={{height: "10px",
-                      width: "10px",
-                      marginBottom: "10px", color: "#132640"}}></i>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="eleven wide column" style={{ marginTop: "7%" }}>
-            <div className="content">
+      <CustomCard>
+        <Link to={`/allAthletes/${id}`}>
+          <Card
+            sx={{
+              borderRadius: "10px",
+              minHeigth: "120px",
+              maxHeigth: "120px",
+            }}
+            key={id}
+          >
+            <CardActionArea>
               <div
                 style={{
-                  fontWeight: "900",
-                  fontSize: "1.1em",
-                  color: "#132640",
-                  maxWidth: "200px",
-                  overflowY: "hidden",
-                  overflowX: "hidden",
-                  whiteSpace: "nowrap",
-                  maxHeight: "20px",
-                  textOverflow: "ellipsis",
+                  display: "grid",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
-                {name}
+                <CardMedia
+                  component="img"
+                  // height="60"
+                  image={imageUrl}
+                  alt="green iguana"
+                  style={{
+                    width: "80px",
+                    // height: "auto",
+                    marginTop: "30px",
+                    marginBottom: "30px",
+                  }}
+                />
               </div>
-              <div style={{ color: "#808C96" }} className="description">
-                @{handle}
-              </div>
-            </div>
-            <div className="eleven wide column">
-              <div className="grid" style={{ marginTop: "10px" }}>
-                <div className="eleven wide column" style={{ display: "flex" }}>
-                  <div style={{ width: "40%", float: "left", display: "flex" }}>
-                    <div
+
+              <CardContent
+                style={{
+                  backgroundColor: "#FAFAFA",
+                  borderTop: "1px solid #E3E7EC",
+                }}
+              >
+                <Box style={{ display: "flex", flexDirection: "row" }}>
+                  <Box style={{ padding: "5px" }}>
+                    <Typography
+                      gutterBottom
+                      variant="h5"
+                      component="div"
                       style={{
-                        width: "20px",
-                        height: "20px",
-                        backgroundColor: "#ECEEEF",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        borderRadius: "5px",
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        {platform === "Facebook" && (
-                          <i
-                          className="facebook f icon small"
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            marginLeft: "3px",
-                            color: "#3B5998"
-                          }}
-                        ></i>
-                        )}
-                          {platform === "Reddit" && (
-                          <i
-                            class="reddit icon inverted"
-                            style={{
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              marginLeft: "3px",
-                              color: "#FF4500"
-                            }}
-                          ></i>
-                        )}
-                        {platform === "Instagram" && (
-                          <i
-                            class="instagram icon"
-                            style={{
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              marginLeft: "3px",
-                              color: "#C13584"
-                            }}
-                          ></i>
-                        )}
-                        
-                      </div>
-                    </div>
-                    <div style={{fontWeight: "700", color: ""}}>{subscriberCount}</div>
-                  </div>
-                  <div
-                    style={{
-                      maxWidth: "125px",
-                      float: "right",
-                      display: "flex",
-                      overflowY: "hidden",
-                      overflowX: "hidden",
-                      whiteSpace: "nowrap",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: "20px",
-                        height: "20px",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        borderRadius: "5px",
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        <i
-                          className="linkify icon small"
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            marginLeft: "3px",
-                          }}
-                        ></i>
-                      </div>
-                    </div>
-                    <div
-                      style={{
+                        fontWeight: "900",
                         fontSize: "1.1em",
                         color: "#132640",
-                        maxWidth: "200px",
+                        maxWidth: "280px",
                         overflowY: "hidden",
                         overflowX: "hidden",
                         whiteSpace: "nowrap",
                         maxHeight: "20px",
                         textOverflow: "ellipsis",
+                        border: "1px solid black"
                       }}
                     >
-                      {url}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+                      {title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {userId}
+                    </Typography>
+                  </Box>
+                </Box>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Link>
+      </CustomCard>
     );
   });
 
   return (
-    <>{renderedList === undefined ? "Hold on just a moment, please!" : renderedList}</>
+    <>
+      {renderedList === undefined
+        ? "Hold on just a moment, please!"
+        : renderedList}
+    </>
   );
 };
 

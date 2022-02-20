@@ -1,30 +1,28 @@
 import React from "react";
+import { styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
 import AthleteCard from "./AthleteCard";
-import { Link } from "react-router-dom";
+import { HomeHeader } from "../../styles/app-styles";
+const useStyles = styled((theme) => ({
+  paper: {
+    padding: theme.spacing(1),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  },
+}));
 
-const AthleteDashboard = () => {
+export default function AutoGrid() {
+  const classes = useStyles();
   return (
     <div>
-      <Link to={"/"}>
-        <button className="ui button">Home</button>
-      </Link>
-      <h1 style={{ display: "grid", placeItems: "center" }}> All Athletes</h1>
-      <div className="container" style={{ maxHeight: "90%" }}>
-        <div
-          className="row scrolling content"
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            overflowY: "scroll",
-            maxHeight: "80%",
-          }}
-        >
-          <AthleteCard />
-        </div>
-      </div>
+      <HomeHeader>All Cards</HomeHeader>
+      <Grid container spacing={1}>
+        
+        <AthleteCard classes={classes} />
+       
+      </Grid>
     </div>
   );
-};
+}
 
-export default AthleteDashboard;

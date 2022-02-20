@@ -6,12 +6,9 @@ import configureStore from "./utils/store";
 import configureHistory from "./utils/history";
 import App from "./app";
 
-const store = configureStore();
-const history = configureHistory();
-
 ReactDOM.render(
-  <Provider store={store}>
-    <Router history={history}>
+  <Provider store={configureStore()}>
+    <Router history={configureHistory()}>
       <App />
     </Router>
   </Provider>,

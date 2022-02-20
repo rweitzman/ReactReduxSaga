@@ -3,7 +3,7 @@ import { takeLatest, call, all , put } from "redux-saga/effects";
 import { actionTypes , actions } from "../actions/athlete-actions";
 
 export const apiCalls = {
-  getAthletes: () => axios.get("getAthleteAccounts"),
+  getAthletes: () => axios.get(),
 };
 
 function* getAthletes() {
