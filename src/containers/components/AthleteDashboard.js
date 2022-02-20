@@ -1,28 +1,29 @@
 import React from "react";
-import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 import AthleteCard from "./AthleteCard";
-import { HomeHeader } from "../../styles/app-styles";
-const useStyles = styled((theme) => ({
-  paper: {
-    padding: theme.spacing(1),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  },
-}));
 
-export default function AutoGrid() {
-  const classes = useStyles();
+import { HomeHeader } from "../../styles/app-styles";
+
+export default function ResponsiveGrid() {
   return (
-    <div>
+    <Box sx={{ flexGrow: 1 }}>
       <HomeHeader>All Cards</HomeHeader>
-      <Grid container spacing={1}>
-        
-        <AthleteCard classes={classes} />
-       
-      </Grid>
-    </div>
+      <Paper style={{maxHeight: "100vh", overflow: 'auto'}}>
+        <Grid
+          container
+          spacing={{ xs: 2, md: 3 }}
+          columns={{ xs: 4, sm: 8, md: 12 }}
+          style={{ overflow: "auto", maxHeight: "100%" }}
+        >
+          {Array.from(Array(6)).map((_, index) => (
+            <Grid item xs={2} sm={4} md={4} key={index}>
+              <AthleteCard />
+            </Grid>
+          ))}
+        </Grid>
+      </Paper>
+    </Box>
   );
 }
-
