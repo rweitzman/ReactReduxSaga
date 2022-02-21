@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import { athleteReducer } from "./athlete-reducer";
+import { cardReducer } from "./card-reducer";
 
 export const rootReducer = combineReducers({
- allAthletes:athleteReducer,
+ allCards:cardReducer,
 });

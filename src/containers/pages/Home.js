@@ -34,7 +34,7 @@ const Home = () => {
           }}
         >
           <h1 style={{fontWeight: "900", fontSize: "2.2em"}}>Hi! Welcome to My Project!</h1>
-          <Link to={"/allAthletes"}>
+          <Link to={"/allCards"}>
             <button className="ui button" style={{width: "300px", height: "100px", fontSize: "1.7em"}}>Click</button>
           </Link>
         </div>

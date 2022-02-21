@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { actions } from "../../actions/athlete-actions";
+import { actions } from "../../actions/card-actions";
 import { Link } from "react-router-dom";
-// If athlete doesn't have a picture, show this placeholder
+
+// If card doesn't have a picture, show this placeholder
 import Card from "@mui/material/Card";
+
+//UI imports from Material UI
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { CardActionArea } from "@mui/material";
+
+//Styling 
+//Custom Components
 import {
   CustomCard,
   RedditStripe,
@@ -20,9 +26,10 @@ import {
   LogoBackground,
   LogoBox,
 } from "../../styles/app-styles";
+// Material UI Theme Provider for styling
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-//icons
+//Material UI icons
 import FacebookIcon from "@mui/icons-material/Facebook";
 import RedditIcon from "@mui/icons-material/Reddit";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -30,53 +37,50 @@ import AndroidIcon from "@mui/icons-material/Android";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InsertLinkIcon from "@mui/icons-material/InsertLink";
 
-export const AthleteCard = () => {
+export const CardComponent = () => {
   const [updatedState, setUpdatesState] = useState([]);
-  const [athleteInfo, setAthleteInfo] = useState([]);
+  const [cardInfo, setCardInfo] = useState([]);
   const dispatch = useDispatch();
 
-  //Pull all athletes
-  const athletes = useSelector((state) => state.allAthletes.athletes);
-
+  //Pull all cards
+  const cards = useSelector((state) => state.allCards.cards);
   useEffect(() => {
-    dispatch(actions.getAthletes());
+    dispatch(actions.getCards());
   }, [dispatch]);
 
-  // Hook to set athletes to new state to be able to change as needed
+  // Hook to set cards to new state to be able to change as needed
   useEffect(() => {
-    if (athletes !== undefined) {
-      setAthleteInfo(athletes);
+    if (cards !== undefined) {
+      setCardInfo(cards);
     }
-    return athleteInfo;
-  }, [athletes]);
+    return cardInfo;
+  }, [cards]);
 
-  // Hook to check to see if athlete has a subscriber count and call function to convert subscriber count format
+  // Hook to check to see if card has an imageUrl count and call function to convert imageUrl format
   useEffect(() => {
-    if (athleteInfo[0]?.imageUrl !== undefined) {
-      console.log("athleteInfo[0]?.imageUrl", athleteInfo[0]?.imageUrl);
-      convertedURL(athleteInfo[0].imageUrl);
+    if (cardInfo[0]?.imageUrl !== undefined) {
+      convertedURL(cardInfo[0].imageUrl);
     }
-  }, [athleteInfo[0]?.imageUrl]);
+  }, [cardInfo[0]?.imageUrl]);
 
-  // make a utility function to adjust picture url so it can be displayed
+  // Utility function to adjust imageUrl so it can be displayed
   const convertedURL = (imageUrl) => {
     let restVar = imageUrl;
     restVar = restVar.replace("i.", "");
-    console.log("restVar", restVar);
     return restVar;
   };
 
   // Hook to  set upadated array info into a new state to render it to the user
   useEffect(() => {
-    if (athleteInfo.legth !== 0) {
-      athleteInfo.map((updatedItem) => {
+    if (cardInfo.legth !== 0) {
+      cardInfo.map((updatedItem) => {
         if (updatedItem.imageUrl) {
           updatedItem.imageUrl = convertedURL(updatedItem.imageUrl);
         }
       });
     }
-    setUpdatesState(athleteInfo);
-  }, [athleteInfo]);
+    setUpdatesState(cardInfo);
+  }, [cardInfo]);
 
   const customCardStyles = {
     borderRadius: "10px",
@@ -109,12 +113,12 @@ export const AthleteCard = () => {
     },
   });
 
-  const renderedList = updatedState?.map((athlete) => {
-    const { id, title, hits, content, likes, categoryId, imageUrl } = athlete;
+  const renderedList = updatedState?.map((card) => {
+    const { id, title, hits, content, likes, categoryId, imageUrl } = card;
 
     return (
       <CustomCard>
-        <Link to={`/allAthletes/${id}`}>
+        <Link to={`/allCards/${id}`}>
           <Card variant="outlined" key={id} style={{ customCardStyles }}>
             <CardActionArea>
               {categoryId === 1 && <RedditStripe />}
@@ -209,8 +213,8 @@ export const AthleteCard = () => {
   );
 };
 
-AthleteCard.propTypes = {
-  getAthletes: PropTypes.func,
+CardComponent.propTypes = {
+  getCards: PropTypes.func,
 };
 
-export default AthleteCard;
+export default CardComponent;

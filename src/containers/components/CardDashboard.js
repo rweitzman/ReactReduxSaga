@@ -2,7 +2,7 @@ import React from "react";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import AthleteCard from "./AthleteCard";
+import CardComponent from "./CardComponent";
 
 import { HomeHeader } from "../../styles/app-styles";
 
@@ -19,7 +19,7 @@ export default function ResponsiveGrid() {
         >
           {Array.from(Array(6)).map((_, index) => (
             <Grid item xs={2} sm={4} md={4} key={index}>
-              <AthleteCard />
+              <CardComponent />
             </Grid>
           ))}
         </Grid>
