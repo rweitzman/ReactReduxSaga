@@ -6,11 +6,13 @@ UI built with Material UI, custom components and styled components, with data co
 Super basic navitagtion built with react-router-dom
 
 ## Getting started
-1.  Run `npm install` to download dependencies
+1. Clone the repo
+
+2.  Run `npm install` to download dependencies
 ```
 npm install
 ```
-2.  Run `npm start` and open your browser to http://localhost:3000
+3.  Run `npm start` and open your browser to http://localhost:3000
 ```
 npm start
 ```
